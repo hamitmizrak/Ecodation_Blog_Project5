@@ -11,5 +11,4 @@ public class AuditorAwareBean {
     public AuditorAware auditorAwareMethod(){
         return  new AuditorAwareImpl();
     }
-
 }
