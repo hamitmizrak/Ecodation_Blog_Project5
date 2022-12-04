@@ -1,5 +1,6 @@
 package com.hamitmizrak.business.dto;
 
+import com.hamitmizrak.annotation.RegisterUniqueEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,6 +27,7 @@ public class RegisterDto {
     @Email
     @Size(max = 200)
     //my special annotation will created
+    @RegisterUniqueEmail
     private String email;
 
     @NotNull(message = "{register.password.validation.constraints.NotNull.message}")

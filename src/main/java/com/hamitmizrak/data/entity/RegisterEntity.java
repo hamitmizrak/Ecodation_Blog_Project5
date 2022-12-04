@@ -17,7 +17,9 @@ import java.io.Serializable;
 @Entity
 @Table(name="register")
 public class RegisterEntity extends BaseEntity implements Serializable {
+
     private String username;
+    //@Column(unique = true) ancak bunun yerine biz zaten kendi annotation'umuzu yazacağız.
     private String email;
     private String passwd;
 }

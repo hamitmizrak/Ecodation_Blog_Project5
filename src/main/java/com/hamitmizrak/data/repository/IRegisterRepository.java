@@ -5,5 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegisterRepository extends JpaRepository<RegisterEntity,Long> {
+public interface IRegisterRepository extends JpaRepository<RegisterEntity,Long> {
+
+    // delivered Query
+    RegisterEntity findByEmail(String email);
 }

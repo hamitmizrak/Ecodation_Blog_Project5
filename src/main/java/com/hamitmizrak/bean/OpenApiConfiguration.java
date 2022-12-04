@@ -25,6 +25,7 @@ public class OpenApiConfiguration {
                 .license(new License()
                         .name("Licence ")
                         .url("www."))
+
         );
     }
 }
