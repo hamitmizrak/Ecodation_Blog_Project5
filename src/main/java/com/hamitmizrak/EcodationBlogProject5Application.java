@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 import java.util.TimeZone;
 
-
+//Spring security Exclude
 @SpringBootApplication(exclude = {
         SecurityAutoConfiguration.class
 }
@@ -17,7 +17,7 @@ public class EcodationBlogProject5Application {
 
     //Spring Constructor
     @PostConstruct
-    public void init(){
+    public void init() {
         TimeZone.setDefault(TimeZone.getTimeZone("IST"));
     }
 
