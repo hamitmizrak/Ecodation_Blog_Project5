@@ -4,8 +4,14 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.TimeZone;
+
+
+//auditor: sisteme kim ne zaman veri ekledi veya güncelledi
+//audit: çalışması için enable yapmalıyız
+@EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
 
 //Spring security Exclude
 @SpringBootApplication(exclude = {
