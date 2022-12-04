@@ -31,7 +31,7 @@ public class RegisterDto {
     @NotNull(message = "{register.password.validation.constraints.NotNull.message}")
     @Size(min = 7,max = 20)
     // Hm123456@
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).*$",message = "{blog.password.validation.constraints.pattern.regex.message}")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).*$",message = "{register.password.validation.constraints.pattern.regex.message}")
     private String passwd;
 
     private Date createdDate;
