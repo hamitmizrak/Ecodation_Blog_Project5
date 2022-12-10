@@ -25,22 +25,21 @@ import java.util.Map;
 //Dış dünyaya açılan kapı
 @RestController
 @RequestMapping("register")
-public class RegisterApiImpl extends AcceptHeaderLocaleResolver implements IRegisterApi {
+public class RegisterApiImpl  implements IRegisterApi {
 
     //Constructor injection
     private final IRegisterService iRegisterService;
 
     //Accept-Language:tr
-    List<Locale> localeList= Arrays.asList(new Locale("tr"),new Locale("en"),new Locale("ge"));
-    @Override
-    public Locale resolveLocale(HttpServletRequest request) {
-        //org.springframework.util.StringUtils;
-        if(StringUtils.isEmpty(request.getHeader("Accept-Language"))){
-            return  Locale.getDefault();
-        }
-        List<Locale.LanguageRange> list=Locale.LanguageRange.parse(request.getHeader("Accept-Language"));
-        Locale locale=Locale.lookup(list,localeList);
-        return locale;
+
+
+    // Header INFORMATION
+    // http://localhost:5555/register/headers
+    @GetMapping("/headers")
+    public void getAllHeaderData(@RequestHeader Map<String,String> headers){
+        headers.forEach((key,value)->{
+            System.out.println("HeaderName: "+key+" HeaderValue: "+value);
+        });
     }
 
     //APP INFORMATION
