@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
 
 import java.util.Date;
+import java.util.Map;
 
 //Lombok
 @Data
@@ -20,15 +22,28 @@ import java.util.Date;
 //Eğer Null giderse frontentte gösterme
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResult {
-
+    private Date date = new Date(System.currentTimeMillis());
+    private int status;
     private String error;
     private String message;
     private String path;
-    private Date date=new Date(System.currentTimeMillis());
 
-    public ApiResult(String error, String message, String path) {
+    //validationError
+    private Map<String, String> validationErrors;
+
+    //parametreli constructors
+    public ApiResult(int status, String error, String message, String path) {
+        this.status = status;
         this.error = error;
         this.message = message;
         this.path = path;
     }
+
+    public ApiResult(int status, String message, String path) {
+        this.status = status;
+        this.message = message;
+        this.path = path;
+    }
+
+
 }

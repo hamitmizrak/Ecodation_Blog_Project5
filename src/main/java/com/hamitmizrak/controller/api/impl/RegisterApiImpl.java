@@ -27,6 +27,7 @@ import java.util.Map;
 //Dış dünyaya açılan kapı
 @RestController
 @RequestMapping("register")
+@CrossOrigin //CORS
 public class RegisterApiImpl  implements IRegisterApi {
 
     //Constructor injection
