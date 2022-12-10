@@ -9,9 +9,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 //Lombok
@@ -21,10 +25,23 @@ import java.util.Map;
 //Dış dünyaya açılan kapı
 @RestController
 @RequestMapping("register")
-public class RegisterApiImpl implements IRegisterApi {
+public class RegisterApiImpl extends AcceptHeaderLocaleResolver implements IRegisterApi {
 
     //Constructor injection
     private final IRegisterService iRegisterService;
+
+    //Accept-Language:tr
+    List<Locale> localeList= Arrays.asList(new Locale("tr"),new Locale("en"),new Locale("ge"));
+    @Override
+    public Locale resolveLocale(HttpServletRequest request) {
+        //org.springframework.util.StringUtils;
+        if(StringUtils.isEmpty(request.getHeader("Accept-Language"))){
+            return  Locale.getDefault();
+        }
+        List<Locale.LanguageRange> list=Locale.LanguageRange.parse(request.getHeader("Accept-Language"));
+        Locale locale=Locale.lookup(list,localeList);
+        return locale;
+    }
 
     //APP INFORMATION
     // http://localhost:5555/register/app/information
