@@ -20,6 +20,7 @@ import java.util.Date;
 
 //super class
 @MappedSuperclass
+
 //auditing
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value={"created_date,update_date"},allowGetters = true)

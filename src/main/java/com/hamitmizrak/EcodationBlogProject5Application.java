@@ -10,6 +10,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.TimeZone;
 
+// Mongo aktif etmek icin
+// @EnableMongoRepositories
+
+// Aspect aktif etmek icin
+// @EnableAspectJAutoProxy(proxyTargetClass = true)
+
+// Asenkron açmak icin
+// @EnableAsync
+
+// Spring Boot Cache mekanizmasını aktif ediyorum
+// @EnableCaching
 
 //auditor: sisteme kim ne zaman veri ekledi veya güncelledi
 @EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
