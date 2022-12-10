@@ -3,6 +3,7 @@ package com.hamitmizrak;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -16,10 +17,15 @@ import java.util.TimeZone;
 //Spring security Exclude
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 
-//@EnableJpaRepositories
+//@EnableJpaRepositories: Repository bulamdığı durumlarda
 //Jpa Repository okumadığı  durumda @EnableJpaRepositories vermemiz gerekecek
 //D:\spring\EcodationBlogProject5\src\main\java\  com\hamitmizrak\data\repository
 @EnableJpaRepositories(basePackages = "com.hamitmizrak.data.repository")
+
+//@EntityScan: Entity bulamadığı durumlarda
+//Entity Classlarını bulamadığı durumlarda
+//D:\spring\EcodationBlogProject5\src\main\java\  com\hamitmizrak\data\entity
+@EntityScan(basePackages = "com.hamitmizrak.data.entity")
 
 public class EcodationBlogProject5Application {
 
