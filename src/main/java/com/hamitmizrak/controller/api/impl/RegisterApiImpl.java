@@ -87,7 +87,7 @@ public class RegisterApiImpl  implements IRegisterApi {
             return ResponseEntity.notFound().build();
         } else if (id == 0) {
             log.error("400 Bad Request--> Kötü istek");
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Kötü istek ");
         }
         log.info("Veri bulundu");
         return ResponseEntity.ok(iRegisterService.getRegisterById(id));
@@ -124,8 +124,8 @@ public class RegisterApiImpl  implements IRegisterApi {
         }
         log.info("Veri bulundu");
 
-        return ResponseEntity.status(HttpStatus.OK).body(iRegisterService.deleteRegister(id));
+        //return ResponseEntity.status(HttpStatus.OK).body(iRegisterService.deleteRegister(id));
         //return ResponseEntity.status(200).body(iRegisterService.deleteRegister(id));
-        //return ResponseEntity.ok(iRegisterService.deleteRegister(id));
+        return ResponseEntity.ok(iRegisterService.deleteRegister(id));
     }
 }
