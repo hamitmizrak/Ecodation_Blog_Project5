@@ -63,7 +63,7 @@ public class RegisterApiImpl implements IRegisterApi {
     // http://localhost:5555/register/1
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRegister(@PathVariable("id") Long id, @Valid @RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> updateRegister(@PathVariable(name = "id",required = false) Long id, @Valid @RequestBody RegisterDto registerDto) {
         if (id == null) {
             log.error("404 Not Found --> Bulunmadı");
             return ResponseEntity.notFound().build();
@@ -80,7 +80,7 @@ public class RegisterApiImpl implements IRegisterApi {
     // Delete için sadece id yeterli objeyi çağırmadım boş yerine serveri yormak istemedim.
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteRegister(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Map<String, Boolean>> deleteRegister(@@PathVariable(name = "id",required = false) Long id) {
         if (id == null) {
             log.error("404 Not Found --> Bulunmadı");
             return ResponseEntity.notFound().build();
