@@ -1,17 +1,20 @@
 package com.hamitmizrak.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.io.Serializable;
 
 //Lombok
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+//@Data
+@Getter
+@Setter
+@EqualsAndHashCode(of="id")
+
 
 //Entity
 @Entity
