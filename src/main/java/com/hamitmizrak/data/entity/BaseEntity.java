@@ -33,7 +33,7 @@ abstract  public class BaseEntity implements Serializable {
     private Long id;
 
     //system current time
-    @Column(name="created_date")
+    @Column(name="system_created_date")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date systemCreatedDate;
