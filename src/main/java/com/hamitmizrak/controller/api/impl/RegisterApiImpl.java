@@ -4,20 +4,15 @@ import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.IRegisterService;
 import com.hamitmizrak.controller.api.IRegisterApi;
 import com.hamitmizrak.error.ApiResult;
+import com.hamitmizrak.profile.IChooiseProfile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 //Lombok
@@ -33,9 +28,17 @@ public class RegisterApiImpl  implements IRegisterApi {
     //Constructor injection
     private final IRegisterService iRegisterService;
 
+    private final IChooiseProfile profile;
+
+    // http://localhost:5555/register/profiles/jsp
+    //PROFILE
+    @GetMapping("/profiles/{data}")
+    public String getProfile(@PathVariable(name="data") String name){
+        log.info(profile.message(name));
+       return  profile.message(name);
+    }
+
     //Accept-Language:tr
-
-
     // Header INFORMATION
     // http://localhost:5555/register/headers
     @GetMapping("/headers")
@@ -52,7 +55,6 @@ public class RegisterApiImpl  implements IRegisterApi {
         String URI = request.getRequestURI();
         String LOCALHOST = request.getLocalAddr();
         String SESSION = request.getSession().toString();
-
         StringBuilder stringBuilder=new StringBuilder();
         stringBuilder.append("uri: "+URI).append("<br/>localhost: "+LOCALHOST).append("<br/>session: "+SESSION);
         String informationToString=stringBuilder.toString();
