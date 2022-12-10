@@ -1,5 +1,6 @@
 package com.hamitmizrak.business.services.impl;
 
+import ch.qos.logback.classic.spi.IThrowableProxy;
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.bean.PasswordEncoderBean;
 import com.hamitmizrak.business.dto.RegisterDto;
@@ -12,10 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //Lombok
 @RequiredArgsConstructor
@@ -74,6 +72,14 @@ public class RegisterServiceImpl implements IRegisterService {
     @Override
     public RegisterDto getRegisterById(Long id) {
         //1.YOL
+        /*Optional<RegisterEntity> registerEntityFind=iRegisterRepository.findById(id);
+        RegisterDto registerDto=EntityToDto(registerEntityFind.get());
+
+        //registerEntityFind.isPresent()
+        //registerDto!=null
+        if(registerEntityFind.isPresent()){
+            return registerDto;
+        }*/
 
         //2.YOL
         RegisterEntity registerEntityFind=   iRegisterRepository.findById(id)
