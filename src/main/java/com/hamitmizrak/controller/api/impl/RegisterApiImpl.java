@@ -3,6 +3,7 @@ package com.hamitmizrak.controller.api.impl;
 import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.IRegisterService;
 import com.hamitmizrak.controller.api.IRegisterApi;
+import com.hamitmizrak.error.ApiResult;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -88,6 +89,15 @@ public class RegisterApiImpl  implements IRegisterApi {
         } else if (id == 0) {
             log.error("400 Bad Request--> Kötü istek");
             return ResponseEntity.badRequest().body("Kötü istek ");
+        } else if (id == -1) {
+            log.error("400 Bad Request--> Kötü istek");
+            //String error, String message, String path
+            ApiResult apiResult= ApiResult.builder()
+                    .error("401")
+                    .message("unAuthorized")
+                    .path("localhost:5555/register")
+                    .build();
+            return ResponseEntity.status(401).body(apiResult);
         }
         log.info("Veri bulundu");
         return ResponseEntity.ok(iRegisterService.getRegisterById(id));
