@@ -24,7 +24,7 @@ import java.util.Map;
 
 //Service: Asıl iş yükünü yapan yer
 @Service
-@Transactional //create,update,delete
+
 public class RegisterServiceImpl implements IRegisterService {
 
     //injection Constructor
@@ -44,13 +44,16 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
     //CREATE
+    @Transactional //create,update,delete (Manipulation)
     @Override
     public RegisterDto createRegister(RegisterDto registerDto) {
         if(registerDto!=null){
             //Spring security masking
             registerDto.setPasswd(passwordEncoderBean.passwordEncoderMethod().encode(registerDto.getPasswd()));
             RegisterEntity registerEntity=DtoToEntity(registerDto);
-            iRegisterRepository.save(registerEntity);
+            RegisterEntity registerEntityId=  iRegisterRepository.save(registerEntity);
+            //ID dönder
+            registerDto.setId(registerEntityId.getId());
         }
         return registerDto;
     }
@@ -80,6 +83,7 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
     //UPDATE
+    @Transactional //create,update,delete  (Manipulation)
     @Override
     public RegisterDto updateRegister(Long id, RegisterDto registerDto) {
         RegisterEntity registerEntityFind=   iRegisterRepository.findById(id)
@@ -94,6 +98,7 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
     //DELETE
+    @Transactional //create,update,delete  (Manipulation)
     @Override
     public Map<String, Boolean> deleteRegister(Long id) {
         RegisterEntity registerEntityFind=   iRegisterRepository.findById(id)

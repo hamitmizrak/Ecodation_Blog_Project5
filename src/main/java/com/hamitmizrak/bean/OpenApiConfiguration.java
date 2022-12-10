@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfiguration {
 
-    //swagger
+    //swagger: API Document
     @Bean
     public OpenAPI openAPIMethod(){
         return new OpenAPI().info( new Info()
