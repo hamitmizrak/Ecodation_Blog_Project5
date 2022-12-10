@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -122,6 +123,9 @@ public class RegisterApiImpl  implements IRegisterApi {
             return ResponseEntity.badRequest().build();
         }
         log.info("Veri bulundu");
-        return ResponseEntity.ok(iRegisterService.deleteRegister(id));
+
+        return ResponseEntity.status(HttpStatus.OK).body(iRegisterService.deleteRegister(id));
+        //return ResponseEntity.status(200).body(iRegisterService.deleteRegister(id));
+        //return ResponseEntity.ok(iRegisterService.deleteRegister(id));
     }
 }
