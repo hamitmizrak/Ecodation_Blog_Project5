@@ -3,6 +3,8 @@ package com.hamitmizrak.controller.api.impl;
 import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.IRegisterService;
 import com.hamitmizrak.controller.api.IRegisterApi;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +25,21 @@ public class RegisterApiImpl implements IRegisterApi {
 
     //Constructor injection
     private final IRegisterService iRegisterService;
+
+    //APP INFORMATION
+    // http://localhost:5555/register/app/information
+    @GetMapping("/app/information")
+    public ResponseEntity<?> getAppInformation(HttpServletRequest request, HttpServletResponse response) {
+        String URI = request.getRequestURI();
+        String LOCALHOST = request.getLocalAddr();
+        String SESSION = request.getSession().toString();
+
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("uri: "+URI).append("<br/>localhost: "+LOCALHOST).append("<br/>session: "+SESSION);
+        String informationToString=stringBuilder.toString();
+        return ResponseEntity.ok(informationToString);
+    }
+
 
     // CREATE
     // http://localhost:5555/register
@@ -46,8 +63,8 @@ public class RegisterApiImpl implements IRegisterApi {
     // http://localhost:5555/register/0
     // http://localhost:5555/register/1
     @Override
-    @GetMapping({"","/{id}"})
-    public ResponseEntity<?> getRegisterById(@PathVariable(name = "id",required = false) Long id) {
+    @GetMapping({"", "/{id}"})
+    public ResponseEntity<?> getRegisterById(@PathVariable(name = "id", required = false) Long id) {
         if (id == null) {
             log.error("404 Not Found --> Bulunmadı");
             return ResponseEntity.notFound().build();
@@ -63,7 +80,7 @@ public class RegisterApiImpl implements IRegisterApi {
     // http://localhost:5555/register/1
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRegister(@PathVariable(name = "id",required = false) Long id, @Valid @RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> updateRegister(@PathVariable(name = "id", required = false) Long id, @Valid @RequestBody RegisterDto registerDto) {
         if (id == null) {
             log.error("404 Not Found --> Bulunmadı");
             return ResponseEntity.notFound().build();
@@ -80,7 +97,7 @@ public class RegisterApiImpl implements IRegisterApi {
     // Delete için sadece id yeterli objeyi çağırmadım boş yerine serveri yormak istemedim.
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteRegister(@@PathVariable(name = "id",required = false) Long id) {
+    public ResponseEntity<Map<String, Boolean>> deleteRegister(@PathVariable(name = "id", required = false) Long id) {
         if (id == null) {
             log.error("404 Not Found --> Bulunmadı");
             return ResponseEntity.notFound().build();
