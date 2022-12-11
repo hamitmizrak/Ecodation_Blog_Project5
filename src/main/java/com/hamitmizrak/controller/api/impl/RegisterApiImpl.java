@@ -82,7 +82,7 @@ public class RegisterApiImpl  implements IRegisterApi {
     }
 
     // LIST
-    // http://localhost:5555/register/list
+    // http://localhost:8080/register/list
     @Override
     @GetMapping(value = "/list")
     public ResponseEntity<List<RegisterDto>> getAllRegister() {

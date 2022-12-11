@@ -1,0 +1,6 @@
+Css ==> <h1 style={{backgorundColor:"red"}}
+JS  ==> {}
+class component ==> this.props.degerAdi (StateFull)
+Function component ==> props.degerAdi (Stateless)
+
+class==> className

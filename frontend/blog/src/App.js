@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+
 import './App.css';
+import ListRegister from './component/blog/ListRegister'
+import Header from './component/Header';
+import Footer from './component/Footer';
+import {BrowserRouter as Router,Route,Switch } from 'react-router-dom';
+import UpdateRegister from './component/blog/UpdateRegister';
+import DetailPageRegister from './component/blog/DetailPageRegister';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Revize <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <h1 class="text-danger">Merhabalar</h1>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Header logo="fa-brands fa-react" menu1="About" menu2="Register" menu3="Contact" />
+        <div className="container">
+          <Switch>
+            <Route path="/" exact component={ListRegister}></Route>
+            <Route path="/register"  component={ListRegister}></Route>
+            <Route path="/register-update/:id"  component={UpdateRegister}></Route>
+            <Route path="/register-view/:id"  component={DetailPageRegister}></Route>
+          </Switch>
+        </div>
+        <Footer special="@Copy; Bütün Haklar Saklıdır" />
+      </Router>
+    </>
   );
 }
 
