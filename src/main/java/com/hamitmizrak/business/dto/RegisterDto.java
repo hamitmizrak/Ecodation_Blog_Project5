@@ -1,13 +1,13 @@
 package com.hamitmizrak.business.dto;
 
 import com.hamitmizrak.annotation.RegisterUniqueEmail;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 //Lombok

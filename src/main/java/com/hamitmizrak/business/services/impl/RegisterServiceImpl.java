@@ -1,6 +1,5 @@
 package com.hamitmizrak.business.services.impl;
 
-import ch.qos.logback.classic.spi.IThrowableProxy;
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.bean.PasswordEncoderBean;
 import com.hamitmizrak.business.dto.RegisterDto;
@@ -22,7 +21,6 @@ import java.util.*;
 
 //Service: Asıl iş yükünü yapan yer
 @Service
-
 public class RegisterServiceImpl implements IRegisterService {
 
     //injection Constructor

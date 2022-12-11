@@ -4,14 +4,14 @@ import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.IRegisterService;
 import com.hamitmizrak.controller.api.IRegisterApi;
 import com.hamitmizrak.error.ApiResult;
-import com.hamitmizrak.profile.IChooiseProfile;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -22,25 +22,32 @@ import java.util.Map;
 //Dış dünyaya açılan kapı
 @RestController
 @RequestMapping("register")
-@CrossOrigin //CORS
+@CrossOrigin(origins = "http://localhost:3000") //CORS
 public class RegisterApiImpl  implements IRegisterApi {
 
     //Constructor injection
     private final IRegisterService iRegisterService;
 
-    private final IChooiseProfile profile;
+    //private final IChooiseProfile profile;
 
     // http://localhost:5555/register/profiles/jsp
     //PROFILE
+   /* @Override
     @GetMapping("/profiles/{data}")
     public String getProfile(@PathVariable(name="data") String name){
         log.info(profile.message(name));
        return  profile.message(name);
+    }*/
+
+    @Override
+    public String getProfile(String name) {
+        return null;
     }
 
     //Accept-Language:tr
     // Header INFORMATION
     // http://localhost:5555/register/headers
+    @Override
     @GetMapping("/headers")
     public void getAllHeaderData(@RequestHeader Map<String,String> headers){
         headers.forEach((key,value)->{
@@ -50,6 +57,7 @@ public class RegisterApiImpl  implements IRegisterApi {
 
     //APP INFORMATION
     // http://localhost:5555/register/app/information
+    @Override
     @GetMapping("/app/information")
     public ResponseEntity<?> getAppInformation(HttpServletRequest request, HttpServletResponse response) {
         String URI = request.getRequestURI();
@@ -68,6 +76,8 @@ public class RegisterApiImpl  implements IRegisterApi {
     @PostMapping//headers = "Register-version-1"
     public ResponseEntity<RegisterDto> createRegister(@Valid @RequestBody RegisterDto registerDto) {
         iRegisterService.createRegister(registerDto);
+        // ApiResult apiResult=new ApiResult(200,PATH,"created Employee");
+        // return ResponseEntity.ok(apiResult);
         return ResponseEntity.ok(registerDto);
     }
 

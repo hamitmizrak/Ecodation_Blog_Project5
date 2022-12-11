@@ -1,6 +1,6 @@
 package com.hamitmizrak;
 
-import jakarta.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 // Mongo aktif etmek icin
@@ -23,7 +24,7 @@ import java.util.TimeZone;
 // @EnableCaching
 
 //auditor: sisteme kim ne zaman veri ekledi veya güncelledi
-@EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
+//@EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
 
 //Spring security Exclude
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
@@ -31,12 +32,12 @@ import java.util.TimeZone;
 //@EnableJpaRepositories: Repository bulamdığı durumlarda
 //Jpa Repository okumadığı  durumda @EnableJpaRepositories vermemiz gerekecek
 //D:\spring\EcodationBlogProject5\src\main\java\  com\hamitmizrak\data\repository
-@EnableJpaRepositories(basePackages = "com.hamitmizrak.data.repository")
+@EnableJpaRepositories(basePackages = "com.hamitmizrak")
 
 //@EntityScan: Entity bulamadığı durumlarda
 //Entity Classlarını bulamadığı durumlarda
 //D:\spring\EcodationBlogProject5\src\main\java\  com\hamitmizrak\data\entity
-@EntityScan(basePackages = "com.hamitmizrak.data.entity")
+@EntityScan(basePackages = "com.hamitmizrak")
 
 public class EcodationBlogProject5Application {
 

@@ -3,13 +3,12 @@ package com.hamitmizrak.bean;
 import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.IRegisterService;
 import com.hamitmizrak.data.repository.IRegisterRepository;
-import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.ServletContext;
 import java.util.UUID;
 
 //lombok
@@ -24,7 +23,7 @@ public class RegisterSpeedData {
     //application properties datadan value almak
     private final ServletContext servletContext;
 
-    @Value("${hello.my.technology.name}")
+    //@Value("${hello.my.technology.name}")
     private String myValueApplicationProperties;
 
     @Bean

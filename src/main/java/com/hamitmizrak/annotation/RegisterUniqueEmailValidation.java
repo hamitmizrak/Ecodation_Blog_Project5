@@ -3,9 +3,10 @@ package com.hamitmizrak.annotation;
 
 import com.hamitmizrak.data.entity.RegisterEntity;
 import com.hamitmizrak.data.repository.IRegisterRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 //lombok
 @RequiredArgsConstructor

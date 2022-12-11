@@ -5,16 +5,16 @@
     <packaging>pom</packaging>
 
     <!--modules: proje içinde proje demektir.-->
-    <modules>
+    <!--<modules>
         <module>Frontend</module>
         <module>Dockerize</module>
-    </modules>
+    </modules>-->
 
     <!--parent-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>2.7.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -28,16 +28,15 @@
     <!--properties-->
     <properties>
         <encoding>UTF-8</encoding>
-        <java.version>19</java.version>
+        <java.version>11</java.version>
 
         <!--for maven-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.target>19</maven.compiler.target>
-        <maven.compiler.source>19</maven.compiler.source>
+
     </properties>
 
-
+    <!--dependencies-->
     <dependencies>
         <!--Spring Web Mvc Rest-->
         <dependency>
@@ -124,18 +123,18 @@
         </dependency>
 
         <!--Mysql-->
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
         <!--postgresql-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Libraries Tools -->
         <!--devtools:otomatik compiler icin-->
@@ -207,25 +206,6 @@
 
     <build>
         <plugins>
-
-            <!-- for maven -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-            </plugin>
-
-            <!-- for maven target 18 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>19</source>
-                    <target>19</target>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
