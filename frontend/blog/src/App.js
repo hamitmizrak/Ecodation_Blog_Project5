@@ -16,8 +16,8 @@ function App() {
           <Switch>
             <Route path="/" exact component={ListRegister}></Route>
             <Route path="/register"  component={ListRegister}></Route>
-            <Route path="/register-add/:id"  component={UpdateRegister}></Route>
-            <Route path="/register-view/:id"  component={DetailPageRegister}></Route>
+            <Route path="/register_add/:id"  component={UpdateRegister}></Route>
+            <Route path="/register_view/:id"  component={DetailPageRegister}></Route>
           </Switch>
         </div>
         <Footer special="@Copy; Bütün Haklar Saklıdır" />

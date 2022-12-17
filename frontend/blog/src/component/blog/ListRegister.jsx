@@ -33,13 +33,20 @@ export default class ListRegister extends Component {
     // UPDATE & ADD 
     // EKLEME ==> http://localhost:3000/register-add/undefined 
     // GÜNCELLEME ==> http://localhost:3000/register-add/1
+
+
+    addRegister(id) {
+        this.props.history.push(`/register_add`)
+    }
+
+
     updateRegister(id) {
-        this.props.history.push(`/register-add/${id}`)
+        this.props.history.push(`/register_add/${id}`)
     }
 
     //VIEW
     viewRegister(id) {
-        this.props.history.push(`/register-view/${id}`)
+        this.props.history.push(`/register_view/${id}`)
     }
 
     //DELETE
@@ -64,7 +71,7 @@ export default class ListRegister extends Component {
                 <h1 className="text-center text-uppercase">Register</h1>
                 <div className="row">
                     <div className="mx-auto">
-                        <button className="btn btn-primary" onClick={()=>this.updateRegister()}>EKLE</button>
+                        <button className="btn btn-primary" onClick={()=>this.addRegister()}>EKLE</button>
                     </div>
                     <table className="table table-hover table-striped">
                         <thead>

@@ -38,7 +38,7 @@ passwd
     // EKLEME    ==> undefined 
     // GÜNCELLEME ==> 1
     //EKLEME
-    if (this.state.id < 0) {
+    if (this.state.id === 'register_add') {
       return;
       //
     } else {//GÜNCELLEME
@@ -60,7 +60,7 @@ passwd
 
   //Dynamics Save Or Update
   titleDynamicsSaveOrUpdate() {
-    if (this.state.id === undefined)
+    if (this.state.id === 'register_add')
       return <h1 className="display-3 text-center mt-4">Üye Ekle</h1>
     else
       return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
@@ -139,8 +139,6 @@ passwd
                 <button className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
                 <button className="btn btn-primary" onClick={this.saveOrUpdateRegister}>Gönder</button>
               </div>
-
-
             </div>
           </div>
         </div>
