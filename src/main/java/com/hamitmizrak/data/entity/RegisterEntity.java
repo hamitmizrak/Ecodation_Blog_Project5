@@ -19,8 +19,7 @@ import javax.persistence.*;
 @Table(name="register")
 public class RegisterEntity{
     //serileştirme
-    //public static final long serialVersionUID = 1L;
-
+    public static final long serialVersionUID = 1L;
 
     //ID
     @Id

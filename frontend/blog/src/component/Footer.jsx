@@ -14,7 +14,8 @@ const nowDate=new Date().getFullYear();
                 {
                     backgroundColor: "black",
                     color: "white",
-                    minHeight: "20rem"
+                    minHeight: "20rem",
+                    marginTop:"40rem"
                 }
             }>
                 {props.special}

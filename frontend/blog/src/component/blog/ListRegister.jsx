@@ -80,6 +80,7 @@ export default class ListRegister extends Component {
                                 <th>USERNAME</th>
                                 <th>EMAIL</th>
                                 <th>PASSWORD</th>
+                                <th>DATE</th>
                                 <th>UPDATE</th>
                                 <th>VIEW</th>
                                 <th>DELETE</th>
@@ -93,15 +94,19 @@ export default class ListRegister extends Component {
                                         <td>{registerlist.username}</td>
                                         <td>{registerlist.email}</td>
                                         <td>{registerlist.passwd}</td>
-                                        <td><button><i className="fa-solid fa-pen-to-square text-primary"></i></button></td>
-                                        <td><button><i className="fa-solid fa-mountain-sun text-success"></i></button></td>
+                                        <td>{registerlist.createdDate}</td>
                                         <td>
-                                            <button>
-                                                <i className="fa-solid fa-trash text-danger" onClick={() => {
-                                                    if (window.confirm("Are you sure you delete this ?"))
-                                                        this.deleteRegister(registerlist.id)
-                                                }}></i>
-                                            </button>
+                                            <i className="fa-solid fa-pen-to-square text-primary" onClick={() => this.updateRegister(registerlist.id)}></i>
+
+                                        </td>
+                                        <td>
+                                            <i className="fa-solid fa-mountain-sun text-success" onClick={() => this.viewRegister(registerlist.id)}></i>
+                                        </td>
+                                        <td>
+                                            <i className="fa-solid fa-trash text-danger" onClick={() => {
+                                                if (window.confirm("Are you sure you delete this ?"))
+                                                    this.deleteRegister(registerlist.id)
+                                            }}></i>
                                         </td>
                                     </tr>
                                 )

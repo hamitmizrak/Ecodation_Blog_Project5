@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.ServletContext;
+import java.util.Date;
 import java.util.UUID;
 
 //lombok
@@ -36,6 +37,7 @@ public class RegisterSpeedData {
                         .email(UUID.randomUUID().toString().concat("@gmail.com"))
                         .passwd(passwordEncoderBean.passwordEncoderMethod().encode("root"))
                         .username(applicationProperties+" "+ myValueApplicationProperties+" "+i)
+                        .createdDate(RegisterDto.getNowDate())
                         .build();
                 iRegisterService.createRegister(registerDto);
             }
