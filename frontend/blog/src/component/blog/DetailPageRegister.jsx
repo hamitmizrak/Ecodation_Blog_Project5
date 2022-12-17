@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices';
 
-
-
 export default class DetailPageRegister extends Component {
-
   //constructor
   constructor(props) {
     super(props);
@@ -14,7 +11,6 @@ export default class DetailPageRegister extends Component {
       id: this.props.match.params.id,
       registerDto: {} //içi boş 
     }
-
     //bind
   }  //end constructor
 
@@ -22,8 +18,6 @@ export default class DetailPageRegister extends Component {
   //1-) Constructor
   //2-) Render
   //3-) CDM
-
-
 
   //CDM
   componentDidMount() {
@@ -35,9 +29,7 @@ export default class DetailPageRegister extends Component {
   }
 
   //functiron start
-
   //functiond end
-
 
   //render
   render() {

@@ -9,7 +9,6 @@ export default class ListRegister extends Component {
             registerlist: []
         }
         //bind
-        this.addRegister = this.addRegister.bind(this);
         this.updateRegister = this.updateRegister.bind(this);
         this.viewRegister = this.viewRegister.bind(this);
         this.deleteRegister = this.deleteRegister.bind(this);
@@ -31,15 +30,10 @@ export default class ListRegister extends Component {
     }
 
     //Function start
-    //ADD
-    addRegister() {
-        this.props.history.push("/register-update/")
-    }
 
-
-    //UPDATE
+    //UPDATE & ADD 
     updateRegister(id) {
-        this.props.history.push(`/register-update/${id}`)
+        this.props.history.push(`/register-add/${id}`)
     }
 
     //VIEW
@@ -53,16 +47,14 @@ export default class ListRegister extends Component {
             response => {
                 this.setState({
                     registerlist: this.state.registerlist.filter(
-                        registerlist => registerlist.id != id
+                        registerlist => registerlist.id !== id
                     )
                 })
             }
         );
     }
 
-
     //Function ends
-
 
     // render
     render() {
@@ -71,7 +63,7 @@ export default class ListRegister extends Component {
                 <h1 className="text-center text-uppercase">Register</h1>
                 <div className="row">
                     <div className="mx-auto">
-                        <button className="btn btn-primary" onClick={this.addRegister}>EKLE</button>
+                        <button className="btn btn-primary" onClick={()=>this.updateRegister()}>EKLE</button>
                     </div>
                     <table className="table table-hover table-striped">
                         <thead>
@@ -95,13 +87,9 @@ export default class ListRegister extends Component {
                                         <td>{registerlist.email}</td>
                                         <td>{registerlist.passwd}</td>
                                         <td>{registerlist.createdDate}</td>
-                                        <td>
-                                            <i className="fa-solid fa-pen-to-square text-primary" onClick={() => this.updateRegister(registerlist.id)}></i>
-
+                                        <td> <i className="fa-solid fa-pen-to-square text-primary" onClick={() => this.updateRegister(registerlist.id)}></i>
                                         </td>
-                                        <td>
-                                            <i className="fa-solid fa-mountain-sun text-success" onClick={() => this.viewRegister(registerlist.id)}></i>
-                                        </td>
+                                        <td> <i className="fa-solid fa-mountain-sun text-success" onClick={() => this.viewRegister(registerlist.id)}></i>  </td>
                                         <td>
                                             <i className="fa-solid fa-trash text-danger" onClick={() => {
                                                 if (window.confirm("Are you sure you delete this ?"))
