@@ -55,7 +55,7 @@ public class RegisterApiImpl  implements IRegisterApi {
         });
     }
 
-    //APP INFORMATION
+    //APP INFORMATION DATA
     // http://localhost:4444/register/app/information
     @Override
     @GetMapping("/app/information")
