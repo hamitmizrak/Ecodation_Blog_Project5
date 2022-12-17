@@ -30,7 +30,7 @@ public class RegisterApiImpl  implements IRegisterApi {
 
     //private final IChooiseProfile profile;
 
-    // http://localhost:5555/register/profiles/jsp
+    // http://localhost:4444/register/profiles/jsp
     //PROFILE
    /* @Override
     @GetMapping("/profiles/{data}")
@@ -46,7 +46,7 @@ public class RegisterApiImpl  implements IRegisterApi {
 
     //Accept-Language:tr
     // Header INFORMATION
-    // http://localhost:5555/register/headers
+    // http://localhost:4444/register/headers
     @Override
     @GetMapping("/headers")
     public void getAllHeaderData(@RequestHeader Map<String,String> headers){
@@ -56,7 +56,7 @@ public class RegisterApiImpl  implements IRegisterApi {
     }
 
     //APP INFORMATION
-    // http://localhost:5555/register/app/information
+    // http://localhost:4444/register/app/information
     @Override
     @GetMapping("/app/information")
     public ResponseEntity<?> getAppInformation(HttpServletRequest request, HttpServletResponse response) {
@@ -71,7 +71,7 @@ public class RegisterApiImpl  implements IRegisterApi {
 
 
     // CREATE
-    // http://localhost:5555/register
+    // http://localhost:4444/register
     @Override
     @PostMapping//headers = "Register-version-1"
     public ResponseEntity<RegisterDto> createRegister(@Valid @RequestBody RegisterDto registerDto) {
@@ -90,9 +90,9 @@ public class RegisterApiImpl  implements IRegisterApi {
     }
 
     // FIND
-    // http://localhost:5555/register
-    // http://localhost:5555/register/0
-    // http://localhost:5555/register/1
+    // http://localhost:4444/register
+    // http://localhost:4444/register/0
+    // http://localhost:4444/register/1
     @Override
     @GetMapping({"", "/{id}"})
     public ResponseEntity<?> getRegisterById(@PathVariable(name = "id", required = false) Long id) {
@@ -108,7 +108,7 @@ public class RegisterApiImpl  implements IRegisterApi {
             ApiResult apiResult= ApiResult.builder()
                     .error("401")
                     .message("unAuthorized")
-                    .path("localhost:5555/register")
+                    .path("localhost:4444/register")
                     .build();
             return ResponseEntity.status(401).body(apiResult);
         }
@@ -117,7 +117,7 @@ public class RegisterApiImpl  implements IRegisterApi {
     }
 
     // UPDATE
-    // http://localhost:5555/register/1
+    // http://localhost:4444/register/1
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRegister(@PathVariable(name = "id", required = false) Long id, @Valid @RequestBody RegisterDto registerDto) {
@@ -133,7 +133,7 @@ public class RegisterApiImpl  implements IRegisterApi {
     }
 
     // DELETE
-    // http://localhost:5555/register/1
+    // http://localhost:4444/register/1
     // Delete için sadece id yeterli objeyi çağırmadım boş yerine serveri yormak istemedim.
     @Override
     @DeleteMapping("/{id}")

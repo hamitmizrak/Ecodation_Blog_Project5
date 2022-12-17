@@ -4,13 +4,16 @@ import RegisterApiServices from '../../services/RegisterApiServices';
 export default class ListRegister extends Component {
     constructor(props) {
         super(props);
-
         //state
         this.state = {
             registerlist: []
         }
-
         //bind
+        this.addRegister = this.addRegister.bind(this);
+        this.updateRegister = this.updateRegister.bind(this);
+        this.viewRegister = this.viewRegister.bind(this);
+        this.deleteRegister = this.deleteRegister.bind(this);
+
     } //end constructor
 
     //cdm ==>TAB
@@ -25,22 +28,51 @@ export default class ListRegister extends Component {
                 })
             }
         )
-
     }
 
-    // id;
-    // username;
-    // email;
-    // passwd;
+    //Function start
+    //ADD
+    addRegister() {
+        this.props.history.push("/register-update/")
+    }
+
+
+    //UPDATE
+    updateRegister(id) {
+        this.props.history.push(`/register-update/${id}`)
+    }
+
+    //VIEW
+    viewRegister(id) {
+        this.props.history.push(`/register-view/${id}`)
+    }
+
+    //DELETE
+    deleteRegister(id) {
+        RegisterApiServices.deleteRegister(id).then(
+            response => {
+                this.setState({
+                    registerlist: this.state.registerlist.filter(
+                        registerlist => registerlist.id != id
+                    )
+                })
+            }
+        );
+    }
+
+
+    //Function ends
+
 
     // render
     render() {
         return (
             <>
                 <h1 className="text-center text-uppercase">Register</h1>
-
                 <div className="row">
-                    <div className="mx-auto"><button className="btn btn-primary">EKLE</button></div>
+                    <div className="mx-auto">
+                        <button className="btn btn-primary" onClick={this.addRegister}>EKLE</button>
+                    </div>
                     <table className="table table-hover table-striped">
                         <thead>
                             <tr>
@@ -63,16 +95,20 @@ export default class ListRegister extends Component {
                                         <td>{registerlist.passwd}</td>
                                         <td><button><i className="fa-solid fa-pen-to-square text-primary"></i></button></td>
                                         <td><button><i className="fa-solid fa-mountain-sun text-success"></i></button></td>
-                                        <td><button><i className="fa-solid fa-trash text-danger"></i></button></td>
+                                        <td>
+                                            <button>
+                                                <i className="fa-solid fa-trash text-danger" onClick={() => {
+                                                    if (window.confirm("Are you sure you delete this ?"))
+                                                        this.deleteRegister(registerlist.id)
+                                                }}></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 )
                             }
-
                         </tbody>
                     </table>
-
                 </div>
-
             </>
         )
     }
