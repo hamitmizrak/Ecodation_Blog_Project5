@@ -1,0 +1,10 @@
+version: '2.13'
+
+services:
+  blog:
+    container_name: blog
+    image: blog
+    restart: always
+    build: ./
+    ports:
+      - '4444:4444'
