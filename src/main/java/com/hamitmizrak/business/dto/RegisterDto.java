@@ -45,4 +45,12 @@ public class RegisterDto {
     public static String getNowDate() {
         return new SimpleDateFormat("dd/MMMM/yyyy HH:mm:ss zzzz",new Locale("tr","TR")).format(new Date());
     }
+
+    /*
+    id
+    username
+    email
+    passwd
+     */
+
 }

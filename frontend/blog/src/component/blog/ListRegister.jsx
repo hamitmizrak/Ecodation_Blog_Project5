@@ -28,10 +28,11 @@ export default class ListRegister extends Component {
             }
         )
     }
+    // Function start
 
-    //Function start
-
-    //UPDATE & ADD 
+    // UPDATE & ADD 
+    // EKLEME ==> http://localhost:3000/register-add/undefined 
+    // GÜNCELLEME ==> http://localhost:3000/register-add/1
     updateRegister(id) {
         this.props.history.push(`/register-add/${id}`)
     }
