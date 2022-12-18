@@ -104,9 +104,7 @@ export default class CreateOrUpdateRegister extends Component {
     console.log(registerDto);
 
     //SPINNER TRUE
-    this.setState({
-      submitSpinner: true
-    })
+    this.setState({submitSpinner: true})
 
     //conditional is it Create?  is it Update ?
     if (this.state.id === 'create') {//CREATE
@@ -114,9 +112,7 @@ export default class CreateOrUpdateRegister extends Component {
         response => {
           console.log(response);
           //SPINNER FALSE
-          this.setState({
-            submitSpinner: false
-          })
+          this.setState({submitSpinner: false})
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Eklendi")
@@ -124,18 +120,14 @@ export default class CreateOrUpdateRegister extends Component {
         }).catch(error => {
           console.log("CREATE Register" + error.response.data)
           //SPINNER FALSE
-          this.setState({
-            submitSpinner: false
-          })
+          this.setState({submitSpinner: false})
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
         response => {
           console.log(response);
           //SPINNER FALSE
-          this.setState({
-            submitSpinner: false
-          })
+          this.setState({submitSpinner: false})
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Güncellendi")
@@ -143,9 +135,7 @@ export default class CreateOrUpdateRegister extends Component {
         }).catch(error => {
           console.log("UPDATE Register" + error.response.data)
           //SPINNER FALSE
-          this.setState({
-            submitSpinner: false
-          })
+          this.setState({submitSpinner: false})
         })
     }
   }
@@ -153,6 +143,7 @@ export default class CreateOrUpdateRegister extends Component {
 
   //render
   render() {
+    //destructing spinner
     const { submitSpinner } = this.state;
     //return
     return (
@@ -179,7 +170,6 @@ export default class CreateOrUpdateRegister extends Component {
                 label="Username" type="text" name="username" id="username"
                 placeholder="Kullanıcı Adınız" autofocus="true"
                 onchange={this.onChangeUsername} value={this.state.username} />
-
 
               {/* email */}
               <CreateOrUpdateReusability
