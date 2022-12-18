@@ -13,7 +13,8 @@ export default class CreateOrUpdateRegister extends Component {
       id: this.props.match.params.id,
       username: '',
       email: '',
-      passwd: ''
+      passwd: '',
+      submitSpinner: false
     }
 
     //bind
@@ -102,24 +103,49 @@ export default class CreateOrUpdateRegister extends Component {
     }
     console.log(registerDto);
 
+    //SPINNER TRUE
+    this.setState({
+      submitSpinner: true
+    })
+
     //conditional is it Create?  is it Update ?
     if (this.state.id === 'create') {//CREATE
       RegisterApiServices.createRegister(registerDto).then(
         response => {
           console.log(response);
+          //SPINNER FALSE
+          this.setState({
+            submitSpinner: false
+          })
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Eklendi")
           }
+        }).catch(error => {
+          console.log("CREATE Register" + error.response.data)
+          //SPINNER FALSE
+          this.setState({
+            submitSpinner: false
+          })
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
         response => {
           console.log(response);
+          //SPINNER FALSE
+          this.setState({
+            submitSpinner: false
+          })
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Güncellendi")
           }
+        }).catch(error => {
+          console.log("UPDATE Register" + error.response.data)
+          //SPINNER FALSE
+          this.setState({
+            submitSpinner: false
+          })
         })
     }
   }
@@ -127,6 +153,8 @@ export default class CreateOrUpdateRegister extends Component {
 
   //render
   render() {
+    const { submitSpinner } = this.state;
+    //return
     return (
       <>
         {this.titleDynamicsSaveOrUpdate()}
@@ -134,7 +162,7 @@ export default class CreateOrUpdateRegister extends Component {
           <div className="row">
             <div className="card-body shadow">
 
-              
+
               {/* 
               USERNAME
               <div className="form-group mb-3">
@@ -147,29 +175,40 @@ export default class CreateOrUpdateRegister extends Component {
 
               {/* label, type, name, id, placeholder, autofocus, onchange, value  */}
               {/* props */}
-              <CreateOrUpdateReusability 
-                 label="Username" type="text" name="username" id="username"
-                 placeholder="Kullanıcı Adınız" autofocus="true" 
+              <CreateOrUpdateReusability
+                label="Username" type="text" name="username" id="username"
+                placeholder="Kullanıcı Adınız" autofocus="true"
                 onchange={this.onChangeUsername} value={this.state.username} />
 
 
               {/* email */}
-              <CreateOrUpdateReusability 
-                 label="Email Address" type="email" name="email" id="email"
-                 placeholder="Kullanıcı Emailiniz" autofocus="false" 
+              <CreateOrUpdateReusability
+                label="Email Address" type="email" name="email" id="email"
+                placeholder="Kullanıcı Emailiniz" autofocus="false"
                 onchange={this.onChangeEmail} value={this.state.email} />
 
               {/* passwd */}
-              <CreateOrUpdateReusability 
-                 label="Password " type="password" name="passwd" id="passwd"
-                 placeholder="Kullanıcı Şifreniz" autofocus="false" 
+              <CreateOrUpdateReusability
+                label="Password " type="password" name="passwd" id="passwd"
+                placeholder="Kullanıcı Şifreniz" autofocus="false"
                 onchange={this.onChangePassword} value={this.state.passwd} />
 
               {/* submit */}
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
-                <button className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
-                <button className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>Gönder</button>
+                <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
+
+
+                <button type="submit" className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>
+                  {
+                    submitSpinner ?
+                      <div className="spinner-border text-warning spinner-border-sm" role="status">
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                      : ""
+                  }
+                  Gönder
+                </button>
                 <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>Admin Page</button>
               </div>
             </div>
