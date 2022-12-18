@@ -114,8 +114,8 @@ passwd
       RegisterApiServices.createRegister(registerDto).then(
         response => {
           console.log(response);
-          if (response.status === 201) {
-            this.props.push("/register");
+          if (response.status === 200) {
+            this.props.history.push("/register");
             alert("Eklendi")
           }
         })
@@ -123,8 +123,8 @@ passwd
       RegisterApiServices.updateRegister(this.state.id,registerDto).then(
         response => {
           console.log(response);
-          if (response.status === 201) {
-            this.props.push("/register");
+          if (response.status === 200) {
+            this.props.history.push("/register");
             alert("Güncellendi")
           }
         })
