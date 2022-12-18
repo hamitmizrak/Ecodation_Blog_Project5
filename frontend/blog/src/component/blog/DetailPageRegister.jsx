@@ -40,11 +40,11 @@ export default class DetailPageRegister extends Component {
           <div className="card mt-5 shadow" style={{padding:"1rem"}}>
           <div className="card-body">
             <h4 className="card-title">Register Details Page</h4>
-            <p className="card-title"><i class="fa-solid fa-fingerprint"></i>: {this.state.registerDto.id} </p>
-            <p className="card-text"><i class="fa-solid fa-user"></i>: {this.state.registerDto.username}</p>
-            <p className="card-text"><i class="fa-solid fa-key"></i>: {this.state.registerDto.passwd}</p>
-            <p className="card-text"><i class="fa-solid fa-envelope-circle-check"></i>: {this.state.registerDto.email}</p>
-            <p className="card-text text-danger ">  <i class="fa-solid fa-clock"></i>: {this.state.registerDto.createdDate}</p>
+            <p className="card-title"><i className="fa-solid fa-fingerprint"></i>: {this.state.registerDto.id} </p>
+            <p className="card-text"><i className="fa-solid fa-user"></i>: {this.state.registerDto.username}</p>
+            <p className="card-text"><i className="fa-solid fa-key"></i>: {this.state.registerDto.passwd}</p>
+            <p className="card-text"><i className="fa-solid fa-envelope-circle-check"></i>: {this.state.registerDto.email}</p>
+            <p className="card-text text-danger ">  <i className="fa-solid fa-clock"></i>: {this.state.registerDto.createdDate}</p>
           </div>
         </div></div>
       </div>

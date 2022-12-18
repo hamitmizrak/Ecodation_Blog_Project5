@@ -4,7 +4,7 @@ import ListRegister from './component/blog/ListRegister'
 import Header from './component/Header';
 import Footer from './component/Footer';
 import {BrowserRouter as Router,Route,Switch } from 'react-router-dom';
-import UpdateRegister from './component/blog/UpdateRegister';
+import CreateOrUpdateRegister from './component/blog/CreateOrUpdateRegister';
 import DetailPageRegister from './component/blog/DetailPageRegister';
 
 function App() {
@@ -16,8 +16,9 @@ function App() {
           <Switch>
             <Route path="/" exact component={ListRegister}></Route>
             <Route path="/register"  component={ListRegister}></Route>
-            <Route path="/register_add/:id"  component={UpdateRegister}></Route>
+            <Route path="/register_add/:id"  component={CreateOrUpdateRegister}></Route>
             <Route path="/register_view/:id"  component={DetailPageRegister}></Route>
+            {/* <Route component={NotFound}/> */}
           </Switch>
         </div>
         <Footer special="@Copy; Bütün Haklar Saklıdır" />

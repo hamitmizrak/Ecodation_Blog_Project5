@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices'
 
-export default class UpdateRegister extends Component {
+export default class CreateOrUpdateRegister extends Component {
   /* 
 id
 username
@@ -38,7 +38,7 @@ passwd
     // EKLEME    ==> undefined 
     // GÜNCELLEME ==> 1
     //EKLEME
-    if (this.state.id === 'register_add') {
+    if (this.state.id === 'create') {
       return;
       //
     } else {//GÜNCELLEME
@@ -60,7 +60,7 @@ passwd
 
   //Dynamics Save Or Update
   titleDynamicsSaveOrUpdate() {
-    if (this.state.id === 'register_add')
+    if (this.state.id === 'create')
       return <h1 className="display-3 text-center mt-4">Üye Ekle</h1>
     else
       return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
@@ -97,8 +97,38 @@ passwd
   }
 
   //SUBMIT
-  saveOrUpdateRegister() {
+  saveOrUpdateRegister = (event) => {
+    //browser sen dur birşey yapma
+    event.preventDefault();
 
+    //register objesini doldurmak
+    const registerDto = {
+      username: this.state.username,
+      email: this.state.email,
+      passwd: this.state.passwd
+    }
+    console.log(registerDto);
+
+    //conditional is it Create?  is it Update ?
+    if (this.state.id === 'create') {//CREATE
+      RegisterApiServices.createRegister(registerDto).then(
+        response => {
+          console.log(response);
+          if (response.status === 201) {
+            this.props.push("/register");
+            alert("Eklendi")
+          }
+        })
+    } else {//UPDATE
+      RegisterApiServices.updateRegister(this.state.id,registerDto).then(
+        response => {
+          console.log(response);
+          if (response.status === 201) {
+            this.props.push("/register");
+            alert("Güncellendi")
+          }
+        })
+    }
   }
 
 

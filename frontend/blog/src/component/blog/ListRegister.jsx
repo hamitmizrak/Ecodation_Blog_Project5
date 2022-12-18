@@ -36,7 +36,7 @@ export default class ListRegister extends Component {
 
 
     addRegister(id) {
-        this.props.history.push(`/register_add`)
+        this.props.history.push(`/register_add/create`)
     }
 
 
