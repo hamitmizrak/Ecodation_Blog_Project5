@@ -1,5 +1,6 @@
-//stateless(durumsuz) ==> function component
-//rfc =>TAB 
+// stateless(durumsuz) ==> function component
+// rfc =>TAB
+// props: componentler arasında veri alış-verişini sağlar.
 import React from 'react'
 
 export default function CreateOrUpdateReusability(props) {
