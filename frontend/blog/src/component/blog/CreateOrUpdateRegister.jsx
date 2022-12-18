@@ -71,23 +71,37 @@ export default class CreateOrUpdateRegister extends Component {
       return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
   }
 
-  //FORM
+
+  // FORM input ==> 1.YOL
   onChangeUsername = (event) => {
+    console.log(event.target.value)
     this.setState({
       username: event.target.value
     })
   }
 
   onChangeEmail = (event) => {
+    console.log(event.target.value)
     this.setState({
       email: event.target.value
     })
   }
 
   onChangePassword = (event) => {
+    console.log(event.target.value)
     this.setState({
       passwd: event.target.value
     })
+  }
+
+  // FORM input ==> 2.YOL
+  onChangeInput = (event) => {
+    const { name, value } = event.target;
+    console.log(event.target.value)
+    //state içeriğini güncellemek
+    this.setState({
+      [name]: value
+    });
   }
 
   //SUBMIT
@@ -104,7 +118,7 @@ export default class CreateOrUpdateRegister extends Component {
     console.log(registerDto);
 
     //SPINNER TRUE
-    this.setState({submitSpinner: true})
+    this.setState({ submitSpinner: true })
 
     //conditional is it Create?  is it Update ?
     if (this.state.id === 'create') {//CREATE
@@ -112,7 +126,7 @@ export default class CreateOrUpdateRegister extends Component {
         response => {
           console.log(response);
           //SPINNER FALSE
-          this.setState({submitSpinner: false})
+          this.setState({ submitSpinner: false })
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Eklendi")
@@ -120,14 +134,14 @@ export default class CreateOrUpdateRegister extends Component {
         }).catch(error => {
           console.log("CREATE Register" + error.response.data)
           //SPINNER FALSE
-          this.setState({submitSpinner: false})
+          this.setState({ submitSpinner: false })
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
         response => {
           console.log(response);
           //SPINNER FALSE
-          this.setState({submitSpinner: false})
+          this.setState({ submitSpinner: false })
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Güncellendi")
@@ -135,7 +149,7 @@ export default class CreateOrUpdateRegister extends Component {
         }).catch(error => {
           console.log("UPDATE Register" + error.response.data)
           //SPINNER FALSE
-          this.setState({submitSpinner: false})
+          this.setState({ submitSpinner: false })
         })
     }
   }
@@ -154,7 +168,6 @@ export default class CreateOrUpdateRegister extends Component {
           <div className="row">
             <div className="card-body shadow">
 
-
               {/* 
               USERNAME
               <div className="form-group mb-3">
@@ -169,27 +182,25 @@ export default class CreateOrUpdateRegister extends Component {
               {/* props */}
               <CreateOrUpdateReusability
                 label="Username" type="text" name="username" id="username"
-                placeholder="Kullanıcı Adınız" autofocus="true"
-                onchange={this.onChangeUsername} value={this.state.username} />
+                placeholder="Kullanıcı Adınız" autofocus={true}
+                onchange={this.onChangeInput} value={this.state.username} />
 
               {/* email */}
               <CreateOrUpdateReusability
                 label="Email Address" type="email" name="email" id="email"
-                placeholder="Kullanıcı Emailiniz" autofocus="false"
-                onchange={this.onChangeEmail} value={this.state.email} />
+                placeholder="Kullanıcı Emailiniz" autofocus={false}
+                onchange={this.onChangeInput} value={this.state.email} />
 
               {/* passwd */}
               <CreateOrUpdateReusability
                 label="Password " type="password" name="passwd" id="passwd"
-                placeholder="Kullanıcı Şifreniz" autofocus="false"
-                onchange={this.onChangePassword} value={this.state.passwd} />
+                placeholder="Kullanıcı Şifreniz" autofocus={false}
+                onchange={this.onChangeInput} value={this.state.passwd} />
 
               {/* submit */}
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
                 <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
-
-
                 <button type="submit" className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>
                   {
                     submitSpinner ?
