@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices'
+import CreateOrUpdateReusability from '../reusability/CreateOrUpdateReusability';
 
 export default class CreateOrUpdateRegister extends Component {
-  /* 
-id
-username
-email
-passwd
- */
-
 
   //constructor
   constructor(props) {
@@ -20,17 +14,18 @@ passwd
       username: '',
       email: '',
       passwd: ''
-
     }
 
     //bind
     this.titleDynamicsSaveOrUpdate = this.titleDynamicsSaveOrUpdate.bind(this);
     this.homePage = this.homePage.bind(this);
-    //this.cancel = this.cancel.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.saveOrUpdateRegister = this.saveOrUpdateRegister.bind(this);
+    this.homePage = this.homePage.bind(this);
+    //Form submit ==> aşağıda kodta bağladım
+    //this.cancel = this.cancel.bind(this); 
   }
 
   //CDM 
@@ -57,16 +52,6 @@ passwd
   } //end componentDidMount
 
   //function start
-
-  //Dynamics Save Or Update
-  titleDynamicsSaveOrUpdate() {
-    if (this.state.id === 'create')
-      return <h1 className="display-3 text-center mt-4">Üye Ekle</h1>
-    else
-      return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
-  }
-
-  //function end
   //HOME
   homePage() {
     return this.props.history.push("/")
@@ -75,6 +60,14 @@ passwd
   //CANCEL
   cancel() {
     return this.props.history.push("/register")
+  }
+
+  //Dynamics Save Or Update
+  titleDynamicsSaveOrUpdate() {
+    if (this.state.id === 'create')
+      return <h1 className="display-3 text-center mt-4">Üye Ekle</h1>
+    else
+      return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
   }
 
   //FORM
@@ -120,7 +113,7 @@ passwd
           }
         })
     } else {//UPDATE
-      RegisterApiServices.updateRegister(this.state.id,registerDto).then(
+      RegisterApiServices.updateRegister(this.state.id, registerDto).then(
         response => {
           console.log(response);
           if (response.status === 200) {
@@ -130,7 +123,7 @@ passwd
         })
     }
   }
-
+  //function end
 
   //render
   render() {
@@ -141,27 +134,36 @@ passwd
           <div className="row">
             <div className="card-body shadow">
 
-              {/* username */}
+              
+              {/* 
+              USERNAME
               <div className="form-group mb-3">
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="username" className='form-control' placeholder='Kullanıcı Adınız'
-                  onChange={this.onChangeUsername} value={this.state.username} />
-              </div>
+                <input type="text" name="username" id="username" className='form-control' 
+                 placeholder='Kullanıcı Adınız' autoFocus="true"
+                  onChange={this.onChangeUsername} value={this.state.username}  />
+              </div> 
+              */}
+
+              {/* label, type, name, id, placeholder, autofocus, onchange, value  */}
+              {/* props */}
+              <CreateOrUpdateReusability 
+                 label="Username" type="text" name="username" id="username"
+                 placeholder="Kullanıcı Adınız" autofocus="true" 
+                onchange={this.onChangeUsername} value={this.state.username} />
 
 
               {/* email */}
-              <div className="form-group mb-3">
-                <label htmlFor="email">email</label>
-                <input type="text" name="email" id="email" className='form-control' placeholder='Kullanıcı email'
-                  onChange={this.onChangeEmail} value={this.state.email} />
-              </div>
+              <CreateOrUpdateReusability 
+                 label="Email Address" type="email" name="email" id="email"
+                 placeholder="Kullanıcı Emailiniz" autofocus="false" 
+                onchange={this.onChangeEmail} value={this.state.email} />
 
               {/* passwd */}
-              <div className="form-group mb-3">
-                <label htmlFor="passwd">passwd</label>
-                <input type="text" name="passwd" id="passwd" className='form-control' placeholder='Kullanıcı passwd'
-                  onChange={this.onChangePassword} value={this.state.passwd} />
-              </div>
+              <CreateOrUpdateReusability 
+                 label="Password " type="password" name="passwd" id="passwd"
+                 placeholder="Kullanıcı Şifreniz" autofocus="false" 
+                onchange={this.onChangePassword} value={this.state.passwd} />
 
               {/* submit */}
               <div className="form-group mt-4 mb-4">
@@ -174,6 +176,6 @@ passwd
           </div>
         </div>
       </>
-    )
-  }
-}
+    ) //end return
+  } //end render
+} //end class
