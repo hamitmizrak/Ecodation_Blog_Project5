@@ -145,6 +145,7 @@ export default class CreateOrUpdateRegister extends Component {
   render() {
     //destructing spinner
     const { submitSpinner } = this.state;
+
     //return
     return (
       <>
