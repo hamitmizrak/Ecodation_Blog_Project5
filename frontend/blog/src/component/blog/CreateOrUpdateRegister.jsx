@@ -69,12 +69,12 @@ passwd
   //function end
   //HOME
   homePage() {
-    return this.props.push("/")
+    return this.props.history.push("/")
   }
 
   //CANCEL
   cancel() {
-    return this.props.push("/")
+    return this.props.history.push("/register")
   }
 
   //FORM
@@ -167,7 +167,8 @@ passwd
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
                 <button className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
-                <button className="btn btn-primary" onClick={this.saveOrUpdateRegister}>Gönder</button>
+                <button className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>Gönder</button>
+                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>Admin Page</button>
               </div>
             </div>
           </div>
