@@ -2,8 +2,10 @@ package com.hamitmizrak.data.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 //Lombok
 @AllArgsConstructor
@@ -30,4 +32,10 @@ public class RegisterEntity{
     //@Column(unique = true) ancak bunun yerine biz zaten kendi annotation'umuzu yazacağız.
     private String email;
     private String passwd;
+
+    //system current time
+    @Column(name="system_created_date")
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date systemCreatedDate;
 }
