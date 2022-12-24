@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 //import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.Map;
 //Spring boot Error and Exception Handling
 public class CustomiseErrorHandleWebRequest implements ErrorController {
 
-   //1.YOL
+    //1.YOL
     //exception handling :400
     //eğer input verilerimizde validation işlemi devereye girdiğinde bu metot çalışacak
   /*
@@ -42,24 +43,25 @@ public class CustomiseErrorHandleWebRequest implements ErrorController {
     //2.YOL
     //constructor Injection
     private final ErrorAttributes errorAttributes;
+
     //Spring hataları benim yazdığım handling(yakalamak)
     @RequestMapping("/error")
-    ApiResult handleValidationErrorException2(WebRequest webRequest){
+    ApiResult handleValidationErrorException2(WebRequest webRequest) {
         //Spring +2.3>
-        Map<String, Object> attributes=this.errorAttributes.getErrorAttributes
-        (
-           webRequest, ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE,ErrorAttributeOptions.Include.BINDING_ERRORS)
-        );
-        int status= (Integer) attributes.get("status");
-        String message=(String)attributes.get("message");
-        String path=(String)attributes.get("path");
-        ApiResult apiResult=new ApiResult(status,message,path);
+        Map<String, Object> attributes = this.errorAttributes.getErrorAttributes
+                (
+                        webRequest, ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE, ErrorAttributeOptions.Include.BINDING_ERRORS)
+                );
+        int status = (Integer) attributes.get("status");
+        String message = (String) attributes.get("message");
+        String path = (String) attributes.get("path");
+        ApiResult apiResult = new ApiResult(status, message, path);
 
-        if(attributes.containsKey("errors")){
-            List<FieldError> listFieldErrors= (List<FieldError>) attributes.get("errors");
-            Map<String,String>validationMistake=new HashMap<>();
-            for(FieldError temp:listFieldErrors){
-                validationMistake.put(temp.getField(),temp.getDefaultMessage());
+        if (attributes.containsKey("errors")) {
+            List<FieldError> listFieldErrors = (List<FieldError>) attributes.get("errors");
+            Map<String, String> validationMistake = new HashMap<>();
+            for (FieldError temp : listFieldErrors) {
+                validationMistake.put(temp.getField(), temp.getDefaultMessage());
             }
             apiResult.setValidationErrors(validationMistake);
         }

@@ -109,8 +109,9 @@ export default class CreateOrUpdateRegister extends Component {
     const { name, value } = event.target;
     console.log(event.target.value)
     
-    //exception handling
-    //input içinde eğer birşey varsa in-valid kaldıralım
+    // exception handling
+    // input içinde eğer birşey varsa in-valid kaldıralım
+    // input doluysa hata vermesin
     // üç nokta (...) ==> biz bir veriyi kopyalamak için kullanıyoruz.
     const errors={...this.state.errors};
     errors[name]=undefined;
