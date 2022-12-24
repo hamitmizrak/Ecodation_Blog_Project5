@@ -10,7 +10,6 @@ class OtherLanguageServices {
         //postman Accept-Language:en
         axios.defaults.headers['accept-language']=language;
     }
-
 }
 
 export default new OtherLanguageServices();
