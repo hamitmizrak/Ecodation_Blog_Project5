@@ -11,10 +11,12 @@ export default class CreateOrUpdateRegister extends Component {
     //state
     this.state = {
       id: this.props.match.params.id,
-      username: '',
-      email: '',
-      passwd: '',
-      submitSpinner: false
+      //dikkat: eğer null vermezsek exception handling'te null değerleri yakalamayız.
+      username:null ,
+      email:null ,
+      passwd:null ,
+      submitSpinner: false,
+      errors:{}
     }
 
     //bind
@@ -133,8 +135,16 @@ export default class CreateOrUpdateRegister extends Component {
           }
         }).catch(error => {
           console.log("CREATE Register" + error.response.data)
+
           //SPINNER FALSE
           this.setState({ submitSpinner: false })
+
+           // exception handling
+          // bize gelen her hata validatioon olmayabilir.
+          if(error.response.data.validationErrors){
+            this.setState({errors:error.response.data.validationErrors})
+            console.log(error.response.data.validationErrors)
+          }
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
@@ -150,6 +160,13 @@ export default class CreateOrUpdateRegister extends Component {
           console.log("UPDATE Register" + error.response.data)
           //SPINNER FALSE
           this.setState({ submitSpinner: false })
+
+           // exception handling
+          // bize gelen her hata validatioon olmayabilir.
+          if(error.response.data.validationErrors){
+            this.setState({errors:error.response.data.validationErrors})
+            console.log(error.response.data.validationErrors)
+          }
         })
     }
   }
@@ -159,6 +176,7 @@ export default class CreateOrUpdateRegister extends Component {
   render() {
     //destructing spinner
     const { submitSpinner } = this.state;
+    const{username,email,passwd}=this.state.errors;
 
     //return
     return (
@@ -183,19 +201,22 @@ export default class CreateOrUpdateRegister extends Component {
               <CreateOrUpdateReusability
                 label="Username" type="text" name="username" id="username"
                 placeholder="Kullanıcı Adınız" autofocus={true}
-                onchange={this.onChangeInput} value={this.state.username} />
+                onchange={this.onChangeInput} value={this.state.username}
+                error={username} />
 
               {/* email */}
               <CreateOrUpdateReusability
                 label="Email Address" type="email" name="email" id="email"
                 placeholder="Kullanıcı Emailiniz" autofocus={false}
-                onchange={this.onChangeInput} value={this.state.email} />
+                onchange={this.onChangeInput} value={this.state.email} 
+                error={email}/>
 
               {/* passwd */}
               <CreateOrUpdateReusability
                 label="Password " type="password" name="passwd" id="passwd"
                 placeholder="Kullanıcı Şifreniz" autofocus={false}
-                onchange={this.onChangeInput} value={this.state.passwd} />
+                onchange={this.onChangeInput} value={this.state.passwd}
+                error={passwd} />
 
               {/* submit */}
               <div className="form-group mt-4 mb-4">
