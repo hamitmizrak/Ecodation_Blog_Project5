@@ -10,21 +10,29 @@ export default class CreateOrUpdateRegister extends Component {
 
     //state
     this.state = {
+      // id params almak
       id: this.props.match.params.id,
+
       //dikkat: eğer null vermezsek exception handling'te null değerleri yakalamayız.
-      username:null ,
-      email:null ,
-      passwd:null ,
+      username: null,
+      email: null,
+      passwd: null,
+
+      //spinner
       submitSpinner: false,
-      errors:{}
+
+      //exception handling
+      errors: {}
     }
 
     //bind
     this.titleDynamicsSaveOrUpdate = this.titleDynamicsSaveOrUpdate.bind(this);
     this.homePage = this.homePage.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    //buradaki 3 bileşen yerine sadece onChangeInput yazdım
+    /*this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);*/
+    this.onChangeInput = this.onChangeInput.bind(this);
     this.saveOrUpdateRegister = this.saveOrUpdateRegister.bind(this);
     this.homePage = this.homePage.bind(this);
     //Form submit ==> aşağıda kodta bağladım
@@ -75,7 +83,7 @@ export default class CreateOrUpdateRegister extends Component {
 
 
   // FORM input ==> 1.YOL
-  onChangeUsername = (event) => {
+  /*onChangeUsername = (event) => {
     console.log(event.target.value)
     this.setState({
       username: event.target.value
@@ -94,17 +102,26 @@ export default class CreateOrUpdateRegister extends Component {
     this.setState({
       passwd: event.target.value
     })
-  }
+  }*/
 
   // FORM input ==> 2.YOL
   onChangeInput = (event) => {
     const { name, value } = event.target;
     console.log(event.target.value)
+    
+    //exception handling
+    //input içinde eğer birşey varsa in-valid kaldıralım
+    // üç nokta (...) ==> biz bir veriyi kopyalamak için kullanıyoruz.
+    const errors={...this.state.errors};
+    errors[name]=undefined;
+
     //state içeriğini güncellemek
     this.setState({
-      [name]: value
+      [name]: value,
+      //exception handling setState
+      errors
     });
-  }
+  } //end onChangeInput
 
   //SUBMIT
   saveOrUpdateRegister = (event) => {
@@ -127,6 +144,7 @@ export default class CreateOrUpdateRegister extends Component {
       RegisterApiServices.createRegister(registerDto).then(
         response => {
           console.log(response);
+
           //SPINNER FALSE
           this.setState({ submitSpinner: false })
           if (response.status === 200) {
@@ -136,15 +154,16 @@ export default class CreateOrUpdateRegister extends Component {
         }).catch(error => {
           console.log("CREATE Register" + error.response.data)
 
-          //SPINNER FALSE
-          this.setState({ submitSpinner: false })
-
-           // exception handling
+          // exception handling
           // bize gelen her hata validatioon olmayabilir.
-          if(error.response.data.validationErrors){
-            this.setState({errors:error.response.data.validationErrors})
+          if (error.response.data.validationErrors) {
+            this.setState({ errors: error.response.data.validationErrors })
             console.log(error.response.data.validationErrors)
           }
+
+
+          //SPINNER FALSE
+          this.setState({ submitSpinner: false })
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
@@ -158,25 +177,29 @@ export default class CreateOrUpdateRegister extends Component {
           }
         }).catch(error => {
           console.log("UPDATE Register" + error.response.data)
-          //SPINNER FALSE
-          this.setState({ submitSpinner: false })
+          
 
-           // exception handling
+          // exception handling
           // bize gelen her hata validatioon olmayabilir.
-          if(error.response.data.validationErrors){
-            this.setState({errors:error.response.data.validationErrors})
+          if (error.response.data.validationErrors) {
+            this.setState({ errors: error.response.data.validationErrors })
             console.log(error.response.data.validationErrors)
           }
         })
+
+        //SPINNER FALSE
+        this.setState({ submitSpinner: false })
     }
-  }
-  //function end
+  } //end saveOrUpdateRegister
+  ///////////////function end
 
   //render
   render() {
     //destructing spinner
     const { submitSpinner } = this.state;
-    const{username,email,passwd}=this.state.errors;
+    
+    //exception handling
+    const { username, email, passwd } = this.state.errors;
 
     //return
     return (
@@ -208,8 +231,8 @@ export default class CreateOrUpdateRegister extends Component {
               <CreateOrUpdateReusability
                 label="Email Address" type="email" name="email" id="email"
                 placeholder="Kullanıcı Emailiniz" autofocus={false}
-                onchange={this.onChangeInput} value={this.state.email} 
-                error={email}/>
+                onchange={this.onChangeInput} value={this.state.email}
+                error={email} />
 
               {/* passwd */}
               <CreateOrUpdateReusability
