@@ -3,8 +3,10 @@
 //rsc => React Stateles Component (state olmayan).
 import React from 'react';
 
-// Dil secenegi
+// Dil secenegi => withTranslation
 import { withTranslation } from 'react-i18next';
+
+// Dil için ==> OtherLanguageServices
 import OtherLanguageServices from "./OtherLanguageServices";
 
 //Funksiyon komponent

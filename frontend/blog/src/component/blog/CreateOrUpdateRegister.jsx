@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices'
 import CreateOrUpdateReusability from '../reusability/CreateOrUpdateReusability';
 
-// Dil secenegi
+// Dil secenegi => withTranslation
 import { withTranslation } from 'react-i18next';
 
 //CLASS 
@@ -26,7 +26,10 @@ class CreateOrUpdateRegister extends Component {
       submitSpinner: false,
 
       //exception handling
-      errors: {}
+      errors: {},
+
+      //aynı anda 1 kere submit olsun
+      submitCloseMultipleRequest: false,
     }
 
     //bind
@@ -112,13 +115,13 @@ class CreateOrUpdateRegister extends Component {
   onChangeInput = (event) => {
     const { name, value } = event.target;
     console.log(event.target.value)
-    
+
     // exception handling
     // input içinde eğer birşey varsa in-valid kaldıralım
     // input doluysa hata vermesin
     // üç nokta (...) ==> biz bir veriyi kopyalamak için kullanıyoruz.
-    const errors={...this.state.errors};
-    errors[name]=undefined;
+    const errors = { ...this.state.errors };
+    errors[name] = undefined;
 
     //state içeriğini güncellemek
     this.setState({
@@ -142,7 +145,9 @@ class CreateOrUpdateRegister extends Component {
     console.log(registerDto);
 
     //SPINNER TRUE
-    this.setState({ submitSpinner: true })
+    this.setState({
+      submitSpinner: true
+    })
 
     //conditional is it Create?  is it Update ?
     if (this.state.id === 'create') {//CREATE
@@ -151,10 +156,10 @@ class CreateOrUpdateRegister extends Component {
           console.log(response);
 
           //SPINNER FALSE
-          this.setState({ submitSpinner: false })
+          this.setState({ submitSpinner: false, submitCloseMultipleRequest: true })
           if (response.status === 200) {
             this.props.history.push("/register");
-            alert("Eklendi")
+            //alert("Eklendi")
           }
         }).catch(error => {
           console.log("CREATE Register" + error.response.data)
@@ -162,38 +167,49 @@ class CreateOrUpdateRegister extends Component {
           // exception handling
           // bize gelen her hata validatioon olmayabilir.
           if (error.response.data.validationErrors) {
-            this.setState({ errors: error.response.data.validationErrors })
+            this.setState({
+              errors: error.response.data.validationErrors
+            })
             console.log(error.response.data.validationErrors)
           }
 
-
           //SPINNER FALSE
-          this.setState({ submitSpinner: false })
+          this.setState({
+            submitSpinner: false
+          })
         })
     } else {//UPDATE
       RegisterApiServices.updateRegister(this.state.id, registerDto).then(
         response => {
           console.log(response);
           //SPINNER FALSE
-          this.setState({ submitSpinner: false })
+          this.setState({
+            submitSpinner: false,
+            submitCloseMultipleRequest: true
+
+          })
           if (response.status === 200) {
             this.props.history.push("/register");
             alert("Güncellendi")
           }
         }).catch(error => {
           console.log("UPDATE Register" + error.response.data)
-          
 
           // exception handling
           // bize gelen her hata validatioon olmayabilir.
           if (error.response.data.validationErrors) {
-            this.setState({ errors: error.response.data.validationErrors })
+            this.setState({
+              errors: error.response.data.validationErrors
+            })
             console.log(error.response.data.validationErrors)
           }
         })
 
-        //SPINNER FALSE
-        this.setState({ submitSpinner: false })
+      //SPINNER FALSE
+      this.setState({
+        submitSpinner: false,
+        submitCloseMultipleRequest: false
+      })
     }
   } //end saveOrUpdateRegister
   ///////////////function end
@@ -202,9 +218,12 @@ class CreateOrUpdateRegister extends Component {
   render() {
     //destructing spinner
     const { submitSpinner } = this.state;
-    
+
     //exception handling
     const { username, email, passwd } = this.state.errors;
+
+    //submit birden fazla kez eklenmesini önlemek
+    const { submitCloseMultipleRequest } = this.state;
 
     //return
     return (
@@ -241,7 +260,7 @@ class CreateOrUpdateRegister extends Component {
 
               {/* passwd */}
               <CreateOrUpdateReusability
-                label={this.props.t('password')}  type="password" name="passwd" id="passwd"
+                label={this.props.t('password')} type="password" name="passwd" id="passwd"
                 placeholder="Kullanıcı Şifreniz" autofocus={false}
                 onchange={this.onChangeInput} value={this.state.passwd}
                 error={passwd} />
@@ -250,7 +269,11 @@ class CreateOrUpdateRegister extends Component {
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
                 <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>{this.props.t('clean')}</button>
-                <button type="submit" className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>
+                <button
+                  type="submit"
+                  className="btn btn-primary me-4"
+                  onClick={this.saveOrUpdateRegister}
+                  disabled={submitCloseMultipleRequest} >
                   {
                     submitSpinner ?
                       <div className="spinner-border text-warning spinner-border-sm" role="status">
@@ -260,7 +283,13 @@ class CreateOrUpdateRegister extends Component {
                   }
                   {this.props.t('submit')}
                 </button>
-                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>{this.props.t('adminPage')}</button>
+
+                {/* admin page button*/}
+                <button
+                  className="btn btn-success"
+                  onClick={this.homePage}>
+                  <i className="fa-solid fa-screwdriver-wrench me-2"></i>{this.props.t('adminPage')}
+                </button>
               </div>
             </div>
           </div>

@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 //i18n adında ==> i18nlanguage.js eklendi
-// i18n ekledim
 import './internationalization/i18nlanguage'
 
 

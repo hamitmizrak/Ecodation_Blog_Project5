@@ -3,7 +3,7 @@
 import React from 'react'
 import OtherLanguageReusability from '../internationalization/OtherLanguageReusability'
 
-// Dil secenegi
+// Dil secenegi => withTranslation
 import { withTranslation } from 'react-i18next';
 
 //Stateless Function
@@ -52,7 +52,7 @@ function Header(props) {
     ) //end return
 } //end class
 
-// export default UserRegister
+// export default Header
 //  Higher Order Component: monad componenti başka bir componentin içine  ekleyip oradanda yeni sonuclar elde etmek
 export default withTranslation()(Header)
 
