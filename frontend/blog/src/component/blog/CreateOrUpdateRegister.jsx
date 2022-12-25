@@ -146,7 +146,8 @@ class CreateOrUpdateRegister extends Component {
 
     //SPINNER TRUE
     this.setState({
-      submitSpinner: true
+      submitSpinner: true,
+      submitCloseMultipleRequest: true,
     })
 
     //conditional is it Create?  is it Update ?
@@ -156,7 +157,7 @@ class CreateOrUpdateRegister extends Component {
           console.log(response);
 
           //SPINNER FALSE
-          this.setState({ submitSpinner: false, submitCloseMultipleRequest: true })
+          this.setState({ submitSpinner: false, submitCloseMultipleRequest: false })
           if (response.status === 200) {
             this.props.history.push("/register");
             //alert("Eklendi")
@@ -168,7 +169,8 @@ class CreateOrUpdateRegister extends Component {
           // bize gelen her hata validatioon olmayabilir.
           if (error.response.data.validationErrors) {
             this.setState({
-              errors: error.response.data.validationErrors
+              errors: error.response.data.validationErrors,
+              submitCloseMultipleRequest: false,
             })
             console.log(error.response.data.validationErrors)
           }
@@ -185,7 +187,7 @@ class CreateOrUpdateRegister extends Component {
           //SPINNER FALSE
           this.setState({
             submitSpinner: false,
-            submitCloseMultipleRequest: true
+            submitCloseMultipleRequest: false
 
           })
           if (response.status === 200) {
@@ -199,7 +201,8 @@ class CreateOrUpdateRegister extends Component {
           // bize gelen her hata validatioon olmayabilir.
           if (error.response.data.validationErrors) {
             this.setState({
-              errors: error.response.data.validationErrors
+              errors: error.response.data.validationErrors,
+              submitCloseMultipleRequest: false,
             })
             console.log(error.response.data.validationErrors)
           }
