@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices'
 import CreateOrUpdateReusability from '../reusability/CreateOrUpdateReusability';
 
-
+// Dil secenegi
+import { withTranslation } from 'react-i18next';
 
 //CLASS 
-export default class CreateOrUpdateRegister extends Component {
+class CreateOrUpdateRegister extends Component {
 
   //constructor
   constructor(props) {
@@ -79,9 +80,9 @@ export default class CreateOrUpdateRegister extends Component {
   //Dynamics Save Or Update
   titleDynamicsSaveOrUpdate() {
     if (this.state.id === 'create')
-      return <h1 className="display-3 text-center mt-4">this.props.t('register')</h1>
+      return <h1 className="display-3 text-center mt-4">{this.props.t('register')}</h1>
     else
-      return <h1 className="display-3 text-center mt-4 text-uppercase">this.props.t('registerUpdate')</h1>
+      return <h1 className="display-3 text-center mt-4 text-uppercase">{this.props.t('registerUpdate')}</h1>
   }
 
 
@@ -226,21 +227,21 @@ export default class CreateOrUpdateRegister extends Component {
               {/* label, type, name, id, placeholder, autofocus, onchange, value  */}
               {/* props */}
               <CreateOrUpdateReusability
-                label="Username" type="text" name="username" id="username"
+                label={this.props.t('username')} type="text" name="username" id="username"
                 placeholder="Kullanıcı Adınız" autofocus={true}
                 onchange={this.onChangeInput} value={this.state.username}
                 error={username} />
 
               {/* email */}
               <CreateOrUpdateReusability
-                label="Email Address" type="email" name="email" id="email"
+                label={this.props.t('email')} type="email" name="email" id="email"
                 placeholder="Kullanıcı Emailiniz" autofocus={false}
                 onchange={this.onChangeInput} value={this.state.email}
                 error={email} />
 
               {/* passwd */}
               <CreateOrUpdateReusability
-                label="Password " type="password" name="passwd" id="passwd"
+                label={this.props.t('password')}  type="password" name="passwd" id="passwd"
                 placeholder="Kullanıcı Şifreniz" autofocus={false}
                 onchange={this.onChangeInput} value={this.state.passwd}
                 error={passwd} />
@@ -248,7 +249,7 @@ export default class CreateOrUpdateRegister extends Component {
               {/* submit */}
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
-                <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>this.props.t('clean')</button>
+                <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>{this.props.t('clean')}</button>
                 <button type="submit" className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>
                   {
                     submitSpinner ?
@@ -257,9 +258,9 @@ export default class CreateOrUpdateRegister extends Component {
                       </div>
                       : ""
                   }
-                  Gönder
+                  {this.props.t('submit')}
                 </button>
-                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>this.props.t('adminPage')</button>
+                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>{this.props.t('adminPage')}</button>
               </div>
             </div>
           </div>
@@ -268,3 +269,7 @@ export default class CreateOrUpdateRegister extends Component {
     ) //end return
   } //end render
 } //end class
+
+// export default UserRegister
+//  Higher Order Component: monad componenti başka bir componentin içine  ekleyip oradanda yeni sonuclar elde etmek
+export default withTranslation()(CreateOrUpdateRegister)

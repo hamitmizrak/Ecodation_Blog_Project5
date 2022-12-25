@@ -3,8 +3,11 @@
 import React from 'react'
 import OtherLanguageReusability from '../internationalization/OtherLanguageReusability'
 
+// Dil secenegi
+import { withTranslation } from 'react-i18next';
+
 //Stateless Function
-export default function Header(props) {
+function Header(props) {
     return (
         <>
             <React.Fragment>
@@ -25,10 +28,10 @@ export default function Header(props) {
                                 </li>
 
                                 <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register/Login</a>
+                                    <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{props.t('register_login')}</a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownId">
                                         <a className="dropdown-item" href="#">{props.menu2}</a>
-                                        <a className="dropdown-item" href="#">Login</a>
+                                        <a className="dropdown-item" href="#">{props.t('login')}</a>
                                     </div>
                                 </li>
 
@@ -39,7 +42,7 @@ export default function Header(props) {
 
                             </ul>
                             <form className="d-flex my-2 my-lg-0">
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">{props.t('search')}</button>
                             </form>
                         </div>
                     </div>
@@ -48,6 +51,10 @@ export default function Header(props) {
         </>
     ) //end return
 } //end class
+
+// export default UserRegister
+//  Higher Order Component: monad componenti başka bir componentin içine  ekleyip oradanda yeni sonuclar elde etmek
+export default withTranslation()(Header)
 
 //defaultProps
 //defaultProps NOT: default function ve/veya class adıyla aynı olması gerekiyor.

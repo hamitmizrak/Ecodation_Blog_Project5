@@ -1,12 +1,12 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-// i18n default information created
 i18n.use(initReactI18next).init({
-    resources:{
-        en:{
+    resources: {
+        en:
+        {
             translations: {
-               'username':"Username",
+                'username':"Username",
                "email":"email address",
                "password":"password",
                "submit":"Submit",
@@ -20,9 +20,14 @@ i18n.use(initReactI18next).init({
                "search":"Search ...",
                "clean":"Cleaner",
                "adminPage":"Admin Page",
-            } // translation
-        } // end EN
-        ,tr:{
+               "date":"Date",
+               'update':"Update",
+               'view':"View",
+               'delete':"Delete",
+            }
+        },
+        tr:
+        {
             translations: {
                'username':"Kullanıcı Adı",
                "email":"email addresiniz",
@@ -38,21 +43,20 @@ i18n.use(initReactI18next).init({
                "search":"Arama ...",
                "clean":"Temizle",
                "adminPage":"Admin Sayfası",
-            } // translation
-        } // end TR
-    }, //end resources
-    fallbackLng:'tr',
-    ns:['translations'],
-    defaultNS:'translations',
-    keySeparator:false,
-    interpolation:{
-        escapeValue:false,
-        formatSeparator:','
+               "date":"Tarih",
+               'update':"Güncelleme",
+               'view':"Göster",
+               'delete':"Sil",
+            }
+        }
     },
-    react:{
-        wait:true
+    fallbackLng: 'tr',    //fallbackLng: 'en', fall back function    
+    ns: ['translations'], //kelimeleri nerede alsın
+    defaultNS: 'translations',
+    keySeparator: false,
+    interpolation: { escapeValue: false, formatSeparator: ',' },
+    react: {
+        wait: true
     }
-}); // end i18next.use()
-
-//export function
+});
 export default i18n;

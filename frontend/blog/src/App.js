@@ -7,13 +7,16 @@ import {BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import CreateOrUpdateRegister from './component/blog/CreateOrUpdateRegister';
 import DetailPageRegister from './component/blog/DetailPageRegister';
 
-import './internationalization/i18n'
+import './internationalization/i18nlanguage.js'
 
-function App() {
+// Dil secenegi
+import { withTranslation } from 'react-i18next';
+
+function App(props) {
   return (
     <>
-      <Router>
-        <Header logo="fa-brands fa-react" menu1="About" menu2="Register" menu3="Contact" />
+      <Router> 
+        <Header logo="fa-brands fa-react" menu1={props.t('about')} menu2={props.t('register')} menu3={props.t('contact')} />
         <div className="container">
           <Switch>
             <Route path="/" exact component={ListRegister}></Route>
@@ -29,4 +32,6 @@ function App() {
   );
 }
 
-export default App;
+// export default 
+//  Higher Order Component: monad componenti başka bir componentin içine  ekleyip oradanda yeni sonuclar elde etmek
+export default withTranslation()(App)

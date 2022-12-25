@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices';
 
-export default class ListRegister extends Component {
+// Dil secenegi
+import { withTranslation } from 'react-i18next';
+
+class ListRegister extends Component {
     constructor(props) {
         super(props);
         //state
@@ -68,22 +71,22 @@ export default class ListRegister extends Component {
     render() {
         return (
             <>
-                <h1 className="text-center text-uppercase">Register</h1>
+                <h1 className="text-center text-uppercase">{this.props.t('register')}</h1>
                 <div className="row">
                     <div className="mx-auto">
-                        <button className="btn btn-primary" onClick={()=>this.addRegister()}>EKLE</button>
+                        <button className="btn btn-primary" onClick={()=>this.addRegister()}>{this.props.t('registerAdd')}</button>
                     </div>
                     <table className="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>USERNAME</th>
-                                <th>EMAIL</th>
-                                <th>PASSWORD</th>
-                                <th>DATE</th>
-                                <th>UPDATE</th>
-                                <th>VIEW</th>
-                                <th>DELETE</th>
+                                <th>{this.props.t('username')}</th>
+                                <th>{this.props.t('email')}</th>
+                                <th>{this.props.t('password')}</th>
+                                <th>{this.props.t('date')}</th>
+                                <th>{this.props.t('update')}</th>
+                                <th>{this.props.t('view')}</th>
+                                <th>{this.props.t('delete')}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,3 +117,9 @@ export default class ListRegister extends Component {
         )
     }
 }
+
+
+
+// export default 
+//  Higher Order Component: monad componenti başka bir componentin içine  ekleyip oradanda yeni sonuclar elde etmek
+export default withTranslation()(ListRegister)
