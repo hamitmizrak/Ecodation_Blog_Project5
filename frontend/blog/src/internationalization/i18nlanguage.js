@@ -11,7 +11,12 @@ i18n.use(initReactI18next).init({
                "password":"password",
                "submit":"Submit",
                "registerAdd":"Register Add",
-               "registerUpdate":"Register Update"
+               "registerUpdate":"Register Update",
+               "register":"Register",
+               "login":"Login",
+               "about":"About",
+               "contact":"Contact",
+               "search":"Search ...",
             } // translation
         } // end EN
         ,tr:{
@@ -21,7 +26,12 @@ i18n.use(initReactI18next).init({
                "password":"Şifreniz",
                "submit":"Gönder",
                "registerAdd":"Üye Ekle",
-               "registerUpdate":"Üye Güncelle"
+               "registerUpdate":"Üye Güncelle",
+               "register":"Üye Kayıt",
+               "login":"Giriş Yap",
+               "about":"Hakkımızda",
+               "contact":"İletişim",
+               "search":"Arama ...",
             } // translation
         } // end TR
     }, //end resources

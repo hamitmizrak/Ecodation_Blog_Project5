@@ -25,10 +25,13 @@ function OtherLanguageReusability(props) {
 
     //RETURN
     return (
-        <div className="container">
-            <a className="dropdown-item" href="#" onClick={() => internationalizationLanguage('tr')}>TR</a>
-            <a className="dropdown-item" href="#" onClick={() => internationalizationLanguage('en')}>EN</a>
-        </div>
+        <>
+            <a className="nav-link dropdown-toggle" href="#" id="dropdownIdRegister" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Diller</a>
+            <div className="dropdown-menu" aria-labelledby="dropdownIdRegister">
+                <a className="dropdown-item" href="#" onClick={() => internationalizationLanguage('tr')}>TR</a>
+                <a className="dropdown-item" href="#" onClick={() => internationalizationLanguage('en')}>EN</a>
+            </div>
+        </>
     )
 } // end function OtherLanguageReusability
 
