@@ -18,6 +18,8 @@ i18n.use(initReactI18next).init({
                "about":"About",
                "contact":"Contact",
                "search":"Search ...",
+               "clean":"Cleaner",
+               "adminPage":"Admin Page",
             } // translation
         } // end EN
         ,tr:{
@@ -34,6 +36,8 @@ i18n.use(initReactI18next).init({
                "about":"Hakkımızda",
                "contact":"İletişim",
                "search":"Arama ...",
+               "clean":"Temizle",
+               "adminPage":"Admin Sayfası",
             } // translation
         } // end TR
     }, //end resources

@@ -7,6 +7,8 @@ import {BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import CreateOrUpdateRegister from './component/blog/CreateOrUpdateRegister';
 import DetailPageRegister from './component/blog/DetailPageRegister';
 
+import './internationalization/i18n'
+
 function App() {
   return (
     <>

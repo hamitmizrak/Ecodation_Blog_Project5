@@ -7,6 +7,7 @@ import React from 'react'
 import OtherLanguageServices from './OtherLanguageServices';
 
 //Dil seçeneği (language chooise)
+import '../internationalization/i18n'
 import { withTranslation } from 'react-i18next';
 
 //FUNCTION

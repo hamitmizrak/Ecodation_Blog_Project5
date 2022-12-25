@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import RegisterApiServices from '../../services/RegisterApiServices'
 import CreateOrUpdateReusability from '../reusability/CreateOrUpdateReusability';
 
+
+
+//CLASS 
 export default class CreateOrUpdateRegister extends Component {
 
   //constructor
@@ -76,9 +79,9 @@ export default class CreateOrUpdateRegister extends Component {
   //Dynamics Save Or Update
   titleDynamicsSaveOrUpdate() {
     if (this.state.id === 'create')
-      return <h1 className="display-3 text-center mt-4">Üye Ekle</h1>
+      return <h1 className="display-3 text-center mt-4">this.props.t('register')</h1>
     else
-      return <h1 className="display-3 text-center mt-4 text-uppercase">Üye Güncelle</h1>
+      return <h1 className="display-3 text-center mt-4 text-uppercase">this.props.t('registerUpdate')</h1>
   }
 
 
@@ -245,7 +248,7 @@ export default class CreateOrUpdateRegister extends Component {
               {/* submit */}
               <div className="form-group mt-4 mb-4">
                 {/* bind kendi satırında yaptım */}
-                <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>Temizle</button>
+                <button type="reset" className="btn btn-danger me-4" onClick={this.cancel.bind(this)}>this.props.t('clean')</button>
                 <button type="submit" className="btn btn-primary me-4" onClick={this.saveOrUpdateRegister}>
                   {
                     submitSpinner ?
@@ -256,7 +259,7 @@ export default class CreateOrUpdateRegister extends Component {
                   }
                   Gönder
                 </button>
-                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>Admin Page</button>
+                <button className="btn btn-success" onClick={this.homePage}><i className="fa-solid fa-screwdriver-wrench me-2"></i>this.props.t('adminPage')</button>
               </div>
             </div>
           </div>
