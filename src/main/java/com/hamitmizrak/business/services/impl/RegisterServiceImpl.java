@@ -82,6 +82,7 @@ public class RegisterServiceImpl implements IRegisterService {
         //2.YOL
         RegisterEntity registerEntityFind=   iRegisterRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException(id+" nolu id bulunamadı"));
+        //registerEntityFind.setPasswd(passwordEncoderBean.passwordEncoderMethod().matches("root",registerEntityFind.getPasswd()));
         RegisterDto registerDto=EntityToDto(registerEntityFind);
         return registerDto;
     }
